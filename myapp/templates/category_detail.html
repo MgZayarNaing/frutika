@@ -1,0 +1,27 @@
+<h1>Products in {{ category.name }}</h1>
+
+<div class="product-list">
+    {% for product in products %}
+        <div class="single-product-item">
+            <div class="product-image">
+                <a href="single-product.html">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                </a>
+            </div>
+            <h3>{{ product.name }}</h3>
+            <p class="product-price"><span>{{ product.weight }}</span>  
+                {% if product.sale_price %}
+                    {% if product.normal_price > product.sale_price %}
+                        <del>${{ product.normal_price }}</del> 
+                    {% endif %}
+                    ${{ product.sale_price }}
+                {% else %}
+                    ${{ product.normal_price }}
+                {% endif %}
+            </p>
+            <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+        </div>
+    {% empty %}
+        <p>No products available in this category.</p>
+    {% endfor %}
+</div>
